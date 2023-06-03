@@ -1,9 +1,6 @@
 package org.payrolljdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class Main {
@@ -21,7 +18,7 @@ public class Main {
         String createDatabase = "CREATE DATABASE payroll_service_JDBC";
         String useDatabase = "USE payroll_service_JDBC";
         /*
-         * Commends for create table and insert in table and the update table data
+         * Commends for create table and insert in table
          */
         String createTable = "CREATE TABLE employee_payroll" +
                 "(id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY ," +
@@ -32,13 +29,25 @@ public class Main {
                 "('Kundan',1787.00,'2021-01-01')," +
                 "('Terisa',999.99,'2022-05-20');";
 
-        String updateData = "UPDATE employee_payroll set salary = 30000 WHERE name='Terisa'";
-
+        /*
+         * Executing all statement
+         */
         statement.execute(createDatabase);
         statement.execute(useDatabase);
         statement.execute(createTable);
         statement.execute(insertIntoTable);
+
+        // updating the data
+        String updateData = "UPDATE employee_payroll set salary = 30000 WHERE name='Terisa'";
         statement.execute(updateData);
+
+        // updating the data using prepared statement
+        String nameToEdit = "Terisa";
+        String updateUsingPrepared = String.format("UPDATE employee_payroll set salary = ?  WHERE name='%s'; ", nameToEdit);
+        PreparedStatement newStatement = connection.prepareStatement(updateUsingPrepared);
+        newStatement.setDouble(1, 2500);
+        newStatement.execute();
+
 
         // commands for delete database
         String deleteDatabase = "DROP DATABASE payroll_service_JDBC";
@@ -51,6 +60,5 @@ public class Main {
             statement.execute(deleteDatabase);
             System.out.println("database deleted successfully....");
         }
-
     }
 }
