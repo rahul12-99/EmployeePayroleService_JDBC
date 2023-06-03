@@ -71,10 +71,13 @@ public class Main {
         statement.execute(min);
         statement.execute(max);
 
+        // Adding new employee to employee_Payroll
+        String insertEmployee = "INSERT INTO employee_payroll(name,salary,start) VALUES " +
+                "('Kalpesh',1090.87,'2021-09-22') ";
+        statement.execute(insertEmployee);
 
         // commands for delete database
         String deleteDatabase = "DROP DATABASE payroll_service_JDBC";
-
 
         System.out.print("Do you want to delete the database (Yes/No) - ");
         String choice = new Scanner(System.in).next();
