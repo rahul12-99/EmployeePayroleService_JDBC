@@ -48,6 +48,19 @@ public class Main {
         newStatement.setDouble(1, 2500);
         newStatement.execute();
 
+        //  retrieve data in particular date range
+        String checkByDate = String.format("SELECT * FROM employee_payroll " +
+                "WHERE start BETWEEN '%s' and '%s'; ", Date.valueOf("2020-12-29"), Date.valueOf("2022-01-01"));
+        ResultSet result = statement.executeQuery(checkByDate);
+        while (result.next()) {
+            String id = result.getString("id");
+            String name = result.getString("name");
+            String salary = result.getString("salary");
+            String start = result.getString("start");
+
+            System.out.println(id + "- " + name + ", " + salary + ", " + start);
+        }
+
 
         // commands for delete database
         String deleteDatabase = "DROP DATABASE payroll_service_JDBC";
