@@ -21,7 +21,7 @@ public class Main {
         String createDatabase = "CREATE DATABASE payroll_service_JDBC";
         String useDatabase = "USE payroll_service_JDBC";
         /*
-         * Commends for create table and insert in table
+         * Commends for create table and insert in table and the update table data
          */
         String createTable = "CREATE TABLE employee_payroll" +
                 "(id INT unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY ," +
@@ -32,10 +32,13 @@ public class Main {
                 "('Kundan',1787.00,'2021-01-01')," +
                 "('Terisa',999.99,'2022-05-20');";
 
+        String updateData = "UPDATE employee_payroll set salary = 30000 WHERE name='Terisa'";
+
         statement.execute(createDatabase);
         statement.execute(useDatabase);
         statement.execute(createTable);
         statement.execute(insertIntoTable);
+        statement.execute(updateData);
 
         // commands for delete database
         String deleteDatabase = "DROP DATABASE payroll_service_JDBC";
